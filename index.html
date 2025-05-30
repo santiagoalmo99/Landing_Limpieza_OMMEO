@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMMEO - Limpieza Confiable y Rápida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+        }
+        /* Estilo para el botón de scroll-to-top */
+        #scrollToTopBtn {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            bottom: 20px; /* 20px desde abajo */
+            right: 20px; /* 20px desde la derecha */
+            z-index: 99; /* Asegura que esté encima de otros elementos */
+            border: none; /* Sin borde */
+            outline: none; /* Sin contorno */
+            background-color: #4F46E5; /* Color de fondo */
+            color: white; /* Color del texto/icono */
+            cursor: pointer; /* Cursor de puntero */
+            padding: 15px; /* Espaciado */
+            border-radius: 50%; /* Redondo */
+            font-size: 18px; /* Tamaño del icono */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+            transition: background-color 0.3s ease; /* Transición suave */
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #4338CA; /* Color de fondo al pasar el ratón */
+        }
+
+        /* Estilos específicos para el slideshow */
+        .slide-container {
+            position: relative;
+            max-width: 800px; /* Puedes ajustar este max-width si quieres un slideshow más ancho */
+            margin: auto;
+            overflow: hidden;
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* shadow-2xl */
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: auto; /* Ajusta la altura automáticamente */
+            object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Puntos indicadores */
+        .dots-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #717171;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="sticky top-0 z-50 bg-white shadow-md py-4 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600">OMMEO</h1>
+            <nav class="flex space-x-4">
+                <a href="#agendar" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out text-sm md:text-base">Agendar por WhatsApp</a>
+                <a href="#descargar" class="bg-gray-200 text-indigo-600 px-4 py-2 rounded-lg shadow-md hover:bg-gray-300 transition duration-300 ease-in-out text-sm md:text-base">Descargar App</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="relative bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20 px-4 md:px-8 overflow-hidden rounded-b-3xl">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 rounded-lg">
+                    ¿Necesitas limpieza confiable y rápida en tu hogar?
+                </h2>
+                <p class="text-lg md:text-xl mb-8 opacity-90">
+                    En OMMEO encuentras profesionales verificados, pagos seguros y atención inmediata.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                    <a href="#agendar" class="bg-white text-indigo-600 px-8 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 ease-in-out font-semibold text-lg">
+                        Agendar limpieza ahora
+                    </a>
+                    <a href="#descargar" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-indigo-600 transition duration-300 ease-in-out font-semibold text-lg">
+                        Descarga la App
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center md:justify-end">
+                <img src="https://placehold.co/400x400/6366F1/FFFFFF?text=Imagen+Principal" alt="Imagen de limpieza del hogar" class="rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 ease-in-out">
+            </div>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute w-64 h-64 bg-white opacity-10 rounded-full -top-16 -left-16"></div>
+            <div class="absolute w-96 h-96 bg-white opacity-10 rounded-full -bottom-32 -right-32"></div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12">¿Por qué elegir OMMEO para tu hogar?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <div class="p-6 bg-gray-100 rounded-xl shadow-md flex flex-col items-center transform hover:scale-105 transition duration-300 ease-in-out">
+                    <div class="text-indigo-600 text-5xl mb-4">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Profesionales de confianza</h4>
+                    <p class="text-gray-600 text-center">Verificados y con experiencia para tu tranquilidad.</p>
+                </div>
+                <div class="p-6 bg-gray-100 rounded-xl shadow-md flex flex-col items-center transform hover:scale-105 transition duration-300 ease-in-out">
+                    <div class="text-indigo-600 text-5xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Garantía de Seguridad</h4>
+                    <p class="text-gray-600 text-center">Tu hogar y tus datos están protegidos.</p>
+                </div>
+                <div class="p-6 bg-gray-100 rounded-xl shadow-md flex flex-col items-center transform hover:scale-105 transition duration-300 ease-in-out">
+                    <div class="text-indigo-600 text-5xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Disponibilidad 24/7</h4>
+                    <p class="text-gray-600 text-center">Agenda cuando lo necesites, a cualquier hora.</p>
+                </div>
+                <div class="p-6 bg-gray-100 rounded-xl shadow-md flex flex-col items-center transform hover:scale-105 transition duration-300 ease-in-out">
+                    <div class="text-indigo-600 text-5xl mb-4">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Precios Transparentes</h4>
+                    <p class="text-gray-600 text-center">Sin sorpresas, sabes cuánto pagarás desde el inicio.</p>
+                </div>
+                 <div class="p-6 bg-gray-100 rounded-xl shadow-md flex flex-col items-center transform hover:scale-105 transition duration-300 ease-in-out">
+                    <div class="text-indigo-600 text-5xl mb-4">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Atención Personalizada</h4>
+                    <p class="text-gray-600 text-center">Soporte dedicado para todas tus necesidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-gray-50" id="agendar">
+        <div class="max-w-6xl mx-auto text-center">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Así de fácil es contratar en OMMEO</h3>
+            <div class="flex flex-col lg:flex-row justify-center items-start gap-12">
+                <div class="bg-white p-8 rounded-2xl shadow-xl lg:w-1/2 w-full">
+                    <h4 class="text-2xl font-semibold text-indigo-600 mb-8 text-center">Desde nuestra Línea de Servicio</h4>
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                            <p class="text-lg text-gray-700">Llámanos o escríbenos por WhatsApp.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                            <p class="text-lg text-gray-700">Indícanos tus necesidades de limpieza.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                            <p class="text-lg text-gray-700">Confirma tu servicio y método de pago.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">4</div>
+                            <p class="text-lg text-gray-700">¡Disfruta de tu hogar limpio y ordenado!</p>
+                        </div>
+                    </div>
+                    <div class="mt-10 text-center">
+                        <a href="#agendar" class="bg-indigo-600 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out font-semibold text-lg">
+                            Agendar limpieza ahora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-xl lg:w-1/2 w-full">
+                    <h4 class="text-2xl font-semibold text-purple-600 mb-8 text-center">Desde la App</h4>
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                            <p class="text-lg text-gray-700">Descarga la App OMMEO.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                            <p class="text-lg text-gray-700">Selecciona el servicio y la fecha.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                            <p class="text-lg text-gray-700">Paga de forma segura y ¡listo!</p>
+                        </div>
+                        <div class="flex items-center space-x-4 opacity-0">
+                            <div class="flex-shrink-0 w-10 h-10 bg-transparent"></div>
+                            <p class="text-lg text-gray-700"></p>
+                        </div>
+                    </div>
+                    <div class="mt-10 text-center">
+                        <a href="#descargar" class="bg-purple-600 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out font-semibold text-lg">
+                            Descarga la App
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Explora la App OMMEO</h3>
+            <div class="slide-container">
+                <img class="slide active" src="https://placehold.co/800x450/FFD700/000000?text=Mockup+App+1" alt="Mockup de la aplicación OMMEO - Pantalla de inicio">
+                <img class="slide" src="https://placehold.co/800x450/ADFF2F/000000?text=Mockup+App+2" alt="Mockup de la aplicación OMMEO - Pantalla de agendamiento">
+                <img class="slide" src="https://placehold.co/800x450/87CEEB/000000?text=Mockup+App+3" alt="Mockup de la aplicación OMMEO - Pantalla de perfil">
+                <img class="slide" src="https://placehold.co/800x450/FF6347/000000?text=Mockup+App+4" alt="Mockup de la aplicación OMMEO - Pantalla de pagos">
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+            <div class="dots-container">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-t-3xl" id="descargar">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                <h3 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Descarga nuestra App</h3>
+                <p class="text-lg md:text-xl mb-8 opacity-90">
+                    Agenda tus limpiezas, gestiona tus servicios y accede a beneficios exclusivos desde tu móvil.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                    <a href="#" class="bg-white text-purple-600 px-8 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 ease-in-out font-semibold text-lg">
+                        <i class="fab fa-apple mr-2"></i> App Store
+                    </a>
+                    <a href="#" class="bg-white text-purple-600 px-8 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 ease-in-out font-semibold text-lg">
+                        <i class="fab fa-google-play mr-2"></i> Google Play
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center md:justify-end">
+                <img src="https://placehold.co/400x400/8B5CF6/FFFFFF?text=Mockups+App" alt="Mockups de la aplicación OMMEO" class="rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 ease-in-out">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto text-center">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Preguntas frecuentes</h3>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer" onclick="toggleFAQ('faq1')">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-xl font-semibold text-gray-800">¿Cómo puedo agendar un servicio de limpieza?</h4>
+                        <i id="icon-faq1" class="fas fa-chevron-down text-indigo-600 transition-transform duration-300"></i>
+                    </div>
+                    <p id="content-faq1" class="mt-4 text-gray-600 hidden text-left">Puedes agendar tu servicio de limpieza a través de nuestra línea de WhatsApp o descargando nuestra aplicación móvil disponible en App Store y Google Play. Ambos métodos son rápidos y seguros.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer" onclick="toggleFAQ('faq2')">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-xl font-semibold text-gray-800">¿Los profesionales de OMMEO están verificados?</h4>
+                        <i id="icon-faq2" class="fas fa-chevron-down text-indigo-600 transition-transform duration-300"></i>
+                    </div>
+                    <p id="content-faq2" class="mt-4 text-gray-600 hidden text-left">Sí, todos nuestros profesionales pasan por un riguroso proceso de verificación y selección para asegurar tu tranquilidad y la máxima calidad en el servicio.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer" onclick="toggleFAQ('faq3')">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-xl font-semibold text-gray-800">¿Qué métodos de pago aceptan?</h4>
+                        <i id="icon-faq3" class="fas fa-chevron-down text-indigo-600 transition-transform duration-300"></i>
+                    </div>
+                    <p id="content-faq3" class="mt-4 text-gray-600 hidden text-left">Aceptamos diversos métodos de pago seguros, incluyendo tarjetas de crédito/débito y pagos a través de la aplicación. Toda la información de pago está protegida.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer" onclick="toggleFAQ('faq4')">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-xl font-semibold text-gray-800">¿Puedo cancelar o modificar mi servicio?</h4>
+                        <i id="icon-faq4" class="fas fa-chevron-down text-indigo-600 transition-transform duration-300"></i>
+                    </div>
+                    <p id="content-faq4" class="mt-4 text-gray-600 hidden text-left">Sí, puedes cancelar o modificar tu servicio con un aviso previo. Consulta nuestras políticas de cancelación en la sección de términos y condiciones de la App o en nuestra web.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 md:px-8 bg-gradient-to-r from-indigo-700 to-blue-800 text-white text-center rounded-t-3xl">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+                ¡Transforma tu hogar hoy mismo!
+            </h3>
+            <p class="text-xl md:text-2xl mb-10 opacity-90">
+                Limpieza garantizada. Tu satisfacción es nuestra prioridad.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
+                <a href="#agendar" class="bg-white text-indigo-700 px-10 py-4 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 ease-in-out font-bold text-xl">
+                    Agendar limpieza ahora
+                </a>
+                <a href="#descargar" class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-lg shadow-lg hover:bg-white hover:text-indigo-700 transition duration-300 ease-in-out font-bold text-xl">
+                    Descarga la App
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <button id="scrollToTopBtn" title="Ir arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Función para el FAQ desplegable
+        function toggleFAQ(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Lógica para el botón de scroll-to-top
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // Mostrar u ocultar el botón según el scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        // Al hacer clic en el botón, desplazar hacia arriba
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // Lógica para el slideshow de imágenes
+        let slideIndex = 1;
+        let slideTimer; // Variable para el temporizador de avance automático
+
+        // Muestra la diapositiva actual
+        function showSlides(n) {
+            let i;
+            const slides = document.getElementsByClassName("slide");
+            const dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            // Reinicia el temporizador cada vez que se muestra una nueva diapositiva
+            resetSlideTimer();
+        }
+
+        // Avanza o retrocede las diapositivas
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Muestra la diapositiva actual al hacer clic en un punto
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Función para el avance automático del slideshow
+        function autoAdvanceSlides() {
+            plusSlides(1); // Avanza a la siguiente diapositiva
+        }
+
+        // Reinicia el temporizador para el avance automático
+        function resetSlideTimer() {
+            clearTimeout(slideTimer); // Limpia el temporizador existente
+            slideTimer = setTimeout(autoAdvanceSlides, 5000); // Avanza cada 5 segundos (5000 ms)
+        }
+
+        // Inicializa el slideshow al cargar la página
+        window.onload = function() {
+            showSlides(slideIndex);
+            resetSlideTimer(); // Inicia el temporizador de avance automático
+        };
+    </script>
+</body>
+</html>
